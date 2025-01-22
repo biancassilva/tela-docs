@@ -41,7 +41,7 @@
     }
   ],
   "api": {
-    "baseUrl": "https://tela-agents-dev.fanheroapi.com"
+    "baseUrl": "https://tela-agents.fanheroapi.com"
   },
   "navigation": [
     {
@@ -55,6 +55,14 @@
         "tela-api-reference/authentication",
         "tela-api-reference/requests",
         "tela-api-reference/streaming"
+      ]
+    },
+    {
+      "group": "Text to Text API",
+      "pages": [
+        "text-to-text/introduction",
+        "text-to-text/quickstart",
+        "text-to-text/development"
       ]
     }
   ],
