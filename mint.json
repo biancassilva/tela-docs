@@ -36,13 +36,10 @@
   "tabs": [
     {
       "name": "TELA",
-      "openapi": "https://tela-agents-dev.fanheroapi.com/openapi.json",
+      "openapi": "https://docs-api.telaos.com/openapi.json",
       "url": "tela-api-reference"
     }
   ],
-  "api": {
-    "baseUrl": "https://tela-agents-dev.fanheroapi.com"
-  },
   "navigation": [
     {
       "group": "Get Started",
