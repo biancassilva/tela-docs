@@ -5,21 +5,55 @@ description: "Learn how Tela API supports streaming responses using server-sent 
 
 Tela API provides the ability to stream responses back to a client, enabling partial results for certain requests. To achieve this, we follow the Server-Sent Events (SSE) standard. Our official Node and Python libraries include helpers to simplify parsing these events.
 
-Streaming is supported for both the Chat Completions API and the Assistants API. This section focuses on how streaming works for Chat Completions. Learn more about how streaming works in the Assistants API [here](#).
+Streaming is supported for both the Chat Completions API and the Assistants API. This section focuses on how streaming works for Chat Completions. Learn more about how streaming works in the Assistants API.
 
 In Python, a streaming request looks like:
 
 ```python
-import tela_api
+import asyncio
+from openai import AsyncOpenAI
 
-# Create a streaming chat completion request
-response = tela_api.ChatCompletion.create(
-    model="gpt-4o-mini",
-    messages=[{"role": "user", "content": "Hello, world!"}],
-    stream=True
+client = AsyncOpenAI(
+    base_url="http://api.telaos.com/v1",
+    api_key="YOUR_API_KEY",
 )
 
-# Iterate over the streamed response chunks
-for chunk in response:
-    print(chunk)
+MODEL = "llama3.2:3b"
+
+
+async def get_response_stream(model, prompt):
+    messages = [
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "user", "content": "What is deep learning?"},
+    ]
+    try:
+        response_generator = await client.chat.completions.create(
+            model=model,
+            messages=messages,
+            stream=True,
+            max_tokens=1000,
+            temperature=0.1,
+        )
+
+        complete_response = (
+            ""
+        )
+
+        async for response_chunk in response_generator:
+            complete_response += response_chunk.chunk
+            print("Complete response:", complete_response)
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+
+async def main():
+    prompts = [f"What is 1+{i}" for i in range(1)]
+    tasks = [get_response_stream(MODEL, prompt) for prompt in prompts]
+
+    await asyncio.gather(*tasks)
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
 ```
