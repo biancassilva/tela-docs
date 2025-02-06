@@ -1,4 +1,31 @@
 ---
 title: "Authentication"
-description: ""
+description: "Learn how to authenticate with Tela API using API keys."
 ---
+
+## API Keys
+
+Tela API uses API keys for authentication. You can create API keys using our API.
+
+> **Important:**  
+> Remember that your API key is a secret! Do not share it with others or expose it in any client-side code (such as in browsers or apps). Production requests must be routed through your own backend server where your API key can be securely loaded from an environment variable or key management service.
+
+All API requests should include your API key in an Authorization HTTP header as follows:
+
+```http
+Authorization: Bearer API_KEY
+
+```
+
+## Examples
+
+```bash
+curl https://api.telaos.com/v1/models \
+  -H "Authorization: Bearer $API_KEY"
+
+```
+
+```python
+Authorization: Bearer TELA_API_KEY
+
+```

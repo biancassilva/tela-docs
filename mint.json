@@ -35,7 +35,7 @@
   ],
   "tabs": [
     {
-      "name": "TELA",
+      "name": "API",
       "openapi": "https://docs-api.telaos.com/openapi.json",
       "url": "tela-api-reference"
     }
@@ -56,6 +56,6 @@
     }
   ],
   "footerSocials": {
-    "github": "https://github.com/TELA-DN/api-agents"
+    "github": "https://github.com/Research-MAGIC"
   }
 }
