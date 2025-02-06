@@ -1,4 +1,25 @@
 ---
 title: "Streaming"
-description: ""
+description: "Learn how Tela API supports streaming responses using server-sent events for chat completions."
 ---
+
+Tela API provides the ability to stream responses back to a client, enabling partial results for certain requests. To achieve this, we follow the Server-Sent Events (SSE) standard. Our official Node and Python libraries include helpers to simplify parsing these events.
+
+Streaming is supported for both the Chat Completions API and the Assistants API. This section focuses on how streaming works for Chat Completions. Learn more about how streaming works in the Assistants API [here](#).
+
+In Python, a streaming request looks like:
+
+```python
+import tela_api
+
+# Create a streaming chat completion request
+response = tela_api.ChatCompletion.create(
+    model="gpt-4o-mini",
+    messages=[{"role": "user", "content": "Hello, world!"}],
+    stream=True
+)
+
+# Iterate over the streamed response chunks
+for chunk in response:
+    print(chunk)
+```

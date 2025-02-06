@@ -1,16 +1,47 @@
 ---
-title: "Making Requests"
-description: ""
+title: "Making requests"
+description: "Run your first API request with Tela API and see how a chat completion is generated."
 ---
 
-### API Keys
 
-TELA API uses Authorization Bearer Token for authentication.
+## Your first request
 
-```json
-"security": [
-  {
-    "authorization": []
-  }
-]
+You can paste the command below into your terminal to run your first API request. Make sure to replace `$API_KEY` with your secret API key.
+
+```bash
+curl https://api.telaos.com/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $TELA_API_KEY" \
+  -d '{
+     "model": "llama3.2:3b",
+     "messages": [{"role": "user", "content": "Say this is a test!"}],
+     "temperature": 0.7
+   }'
+```
+
+### **Response**:
+
+```bash
+{
+	"id": "chatcmpl-856",
+	"object": "chat.completion",
+	"created": 1738865830,
+	"model": "llama3.1:8b",
+	"system_fingerprint": "tela-hypergrid",
+	"choices": [
+		{
+			"index": 0,
+			"message": {
+				"role": "assistant",
+				"content": " We will call you with the results!\nThis entry was posted in About, Fun. Bookmark the permalink.\nThe first thing we do, let's kill all the lawyers."
+			},
+			"finish_reason": "stop"
+		}
+	],
+	"usage": {
+		"prompt_tokens": 7,
+		"completion_tokens": 35,
+		"total_tokens": 42
+	}
+}
 ```
